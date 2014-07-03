@@ -1,0 +1,93 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+
+  color: #333;
+  text-align: center;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 16px;
+}
+
+.controls {
+  width: 438px;
+  margin: 0 auto;
+  font-weight: bold;
+
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+#feedback {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 30px;
+}
+
+#feedback .fa {
+  font-size: 42px;
+  padding-left: 8px;
+}
+
+#new-game {
+  padding: 15px 0;
+  cursor: pointer;
+  background-color: #777;
+  color: #fff;
+}
+
+#new-game:hover { background-color: #333; }
+
+#board {
+  min-width: 440px; /* 10 cols */
+  margin: 20px 0;
+}
+
+.space {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+
+  background-color: #bbb;
+  border: 2px solid transparent;
+  margin: 1px;
+  cursor: pointer;
+
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  overflow-y: hidden; /* for fa icons */
+  vertical-align: top; /* for overflow */
+
+  text-align: center;
+  color: #fff;
+  font-size: 22px;
+  line-height: 38px;
+}
+
+.space .fa { line-height: 40px; }
+.space .fa-bomb { font-size: 24px; }
+.space .fa-smile-o { font-size: 26px; }
+
+.space:hover { border-color: #777; }
+
+.safe {
+  background-color: #eee;
+  color: #777;
+}
+
+.bomb {
+  color: #333;
+}
+
+.triggered-bomb {
+  color: #fff;
+  background-color: #333;
+}

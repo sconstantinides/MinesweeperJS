@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JS Minesweeper</title>
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="minesweeper.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="minesweeper.js"></script>
+</head>
+<body>
+  <div id="feedback" class="controls"></div>
+  <div id="board"></div>
+  <div id="new-game" class="controls">Play again?</div>
+
+  <script type="text/javascript">
+    $(function(){
+
+      // Set game parameters
+        var numRows = 7;
+        var numCols = 10;
+        var numBombs = 10;
+
+      // Create a new game
+        newGame(numRows, numCols, numBombs);
+
+      // Set new game listener
+        $("#new-game").click(function(event) {
+            event.preventDefault();
+            newGame(numRows, numCols, numBombs);
+        });
+
+    });
+  </script>
+</body>
+</html>
