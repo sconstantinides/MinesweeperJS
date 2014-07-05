@@ -2,92 +2,188 @@
 body {
   margin: 0;
   padding: 0;
+  border: none;
   background-color: #fff;
 
   color: #333;
-  text-align: center;
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 16px;
+  text-align: center; /* Important */
 }
 
-.controls {
-  width: 438px;
-  margin: 0 auto;
-  font-weight: bold;
+/* Dashboard and controls */
 
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-}
+  .controls {
+    width: 438px; /* (numCols * 44) - 2 */
+    margin: 0 auto;
+    font-weight: bold;
 
-#feedback {
-  margin-top: 30px;
-  text-align: right;
-  font-size: 30px;
-}
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 
-#feedback .fa {
-  font-size: 42px;
-  padding-left: 8px;
-}
+    position: relative;
+  }
 
-#new-game {
-  padding: 15px 0;
-  cursor: pointer;
-  background-color: #777;
-  color: #fff;
-}
+  #dashboard {
+    text-align: left;
+    margin-top: 30px;
+  }
 
-#new-game:hover { background-color: #333; }
+  #difficulty {
+    list-style: none;
+    padding: 0;
 
-#board {
-  min-width: 440px; /* 10 cols */
-  margin: 20px 0;
-}
+    display: inline-block;
+  }
 
-.space {
-  display: inline-block;
-  width: 38px;
-  height: 38px;
+  #difficulty li {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
 
-  background-color: #bbb;
-  border: 2px solid transparent;
-  margin: 1px;
-  cursor: pointer;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
 
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
+    background-color: #bbb;
+    color: #fff;
+    padding: 6px 8px;
+  }
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  #difficulty li:hover { background-color: #333; }
+  #difficulty li.selected { background-color: #777; }
 
-  overflow-y: hidden; /* for fa icons */
-  vertical-align: top; /* for overflow */
+  #feedback {
+    display: inline-block;
+    position: absolute;
+    right: 0;
 
-  text-align: center;
-  color: #fff;
-  font-size: 22px;
-  line-height: 38px;
-}
+    font-size: 30px;
+    padding-top: 4px;
+  }
 
-.space .fa { line-height: 40px; }
-.space .fa-bomb { font-size: 24px; }
-.space .fa-smile-o { font-size: 26px; }
+  #feedback .fa {
+    font-size: 42px;
+    padding-left: 8px;
+  }
 
-.space:hover { border-color: #777; }
+  #new-game {
+    padding: 15px 0;
+    cursor: pointer;
+    background-color: #777;
+    color: #fff;
+  }
 
-.safe {
-  background-color: #eee;
-  color: #777;
-}
+  #new-game:hover { background-color: #333; }
 
-.bomb {
-  color: #333;
-}
+/* Game styles */
 
-.triggered-bomb {
-  color: #fff;
-  background-color: #333;
-}
+  #board {
+    min-width: 440px; /* (numCols * 44) */
+    margin: 20px 0;
+  }
+
+  .space {
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+
+    background-color: #bbb;
+    border: 2px solid transparent;
+    margin: 1px;
+    cursor: pointer;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    overflow-y: hidden; /* for fa icons */
+    vertical-align: top; /* for overflow */
+
+    text-align: center;
+    color: #fff;
+    font-size: 22px;
+    line-height: 38px;
+  }
+
+  .space .fa { line-height: 40px; }
+  .space .fa-bomb { font-size: 24px; }
+  .space .fa-smile-o { font-size: 26px; }
+
+  .space:hover { border-color: #777; }
+
+  .safe {
+    background-color: #eee;
+    color: #777;
+  }
+
+  .bomb {
+    color: #333;
+  }
+
+  .triggered-bomb {
+    color: #fff;
+    background-color: #333;
+  }
+
+/* Help button and modal */
+
+  #help-btn {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+
+    font-size: 32px;
+    color: #bbb;
+  }
+
+  #help-btn:hover { color: #333; }
+
+  #help {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #help:target {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #help-content {
+    width: 340px;
+    margin: 120px auto 0 auto;
+    padding: 10px 25px;
+    border-radius: 10px;
+
+    background-color: #fff;
+  }
+
+  #help-content .fa { padding-right: 0.3em; }
+
+  #help-content a, #help-content a:visited { color: #333; }
+
+  #help-content a:hover { color: #777; }
+
+  #close { font-weight: bold; }
+
+  #credit {
+    padding-top: 5px;
+    font-size: 0.8em;
+    font-style: italic;
+    color: #bbb;
+  }

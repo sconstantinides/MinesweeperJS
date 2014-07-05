@@ -1,32 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JS Minesweeper</title>
+  <title>Minesweeper</title>
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="minesweeper.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="minesweeper.js"></script>
 </head>
 <body>
-  <div id="feedback" class="controls"></div>
+  <div id="dashboard" class="controls">
+    <ul id="difficulty">
+      <li id="easy">Easy</li>
+      <li id="reg" class="selected">Reg</li>
+      <li id="hard">Hard</li>
+    </ul>
+    <div id="feedback"></div>
+  </div>
   <div id="board"></div>
   <div id="new-game" class="controls">Play again?</div>
+
+  <a href="#help" title="Help">
+    <i id="help-btn" class="fa fa-question-circle"></i>
+  </a>
+  <div id="help">
+    <div id="help-content">
+      <h2>
+        <i class="fa fa-bookmark"></i>HOW TO PLAY
+      </h2>
+      <p>The game starts with mines hidden on the board. Your goal is to uncover the safe squares.</p>
+      <p>When you click on a safe square, you'll see the number of bombs that square touches.</p>
+      <p>To help keep track, you can mark squares as bombs by right-clicking on them.</p>
+      <a href="" title="Close" id="close">
+        <i class="fa fa-times-circle"></i>Close this window
+      </a>
+      <p id="credit">
+        Built by @stothelios as an experiment in JS objects.
+      </p>
+    </div>
+  </div>
 
   <script type="text/javascript">
     $(function(){
 
-      // Set game parameters
-        var numRows = 7;
-        var numCols = 10;
-        var numBombs = 10;
+      // Start on easy, reg, or hard
+        var difficulty = 'reg';
 
       // Create a new game
-        newGame(numRows, numCols, numBombs);
+        newGame(difficulty);
 
-      // Set new game listener
+      // Set new game listeners
         $("#new-game").click(function(event) {
-            event.preventDefault();
-            newGame(numRows, numCols, numBombs);
+            var difficulty = $('#difficulty li.selected').attr('id');
+            newGame(difficulty);
+        });
+
+        $("#difficulty li").click(function(event) {
+            $('#difficulty li').removeClass('selected');
+            $(this).addClass('selected');
+
+            var difficulty = this.id;
+            newGame(difficulty);
         });
 
     });

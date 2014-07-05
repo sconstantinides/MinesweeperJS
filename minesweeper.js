@@ -130,11 +130,28 @@
 
 // New game function
 
-  function newGame(rows, cols, numBombs) {
-    $('#board').empty();
-    board = new Board(rows, cols); // Global
+  function newGame(difficulty) {
+    // Clear the board
+      $('#board').empty();
+
+    // Determine the board size and number of bombs
+      if(difficulty == 'easy') {
+        var rows = 6;
+        var cols = 8;
+        var numBombs = 5;
+      } else if (difficulty == 'hard') {
+        var rows = 10;
+        var cols = 12;
+        var numBombs = 30;
+      } else {
+        var rows = 8;
+        var cols = 10;
+        var numBombs = 15;
+      }
 
     // Create the board
+      board = new Board(rows, cols); // Global
+
       for(var row = 1; row <= board.rows; row++) {
         for(var col = 1; col <= board.cols; col++) {
           var space = board.getSpace(row, col);
@@ -143,7 +160,7 @@
         $('#board').append("<br>");
       }
 
-    // Set the bombs
+    // Randomly place the bombs
       while(board.bombs.length < numBombs) {
         var rand_row = Math.floor(Math.random() * board.rows) + 1;
         var rand_col = Math.floor(Math.random() * board.cols) + 1;
@@ -155,7 +172,7 @@
         }
       }
 
-    // Set space listeners
+    // Set the space listeners
       document.oncontextmenu = function() { return false; };
 
       $('.space').mousedown(function(event) {
@@ -170,7 +187,11 @@
         }
       });
 
-    // Set game feedback
+    // Set the board and control widths
+      $('#board').css('min-width', (cols * 44));
+      $('.controls').css('width', (cols * 44) - 2);
+
+    // Set the game feedback
       $('#feedback').html('<span id="value">' + board.bombs.length + '</span><i class="fa fa-bomb"></i>');
       $('#new-game').hide();
   }
