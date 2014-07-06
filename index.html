@@ -2,6 +2,9 @@
 <html>
 <head>
   <title>Minesweeper</title>
+  <meta charset="utf-8">
+  <meta name="description" content="A simple Minesweeper game built using JavaScript.">
+  <meta name="author" content="Stelios Constantinides">
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="minesweeper.css">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -19,25 +22,27 @@
   <div id="board"></div>
   <div id="new-game" class="controls">Play again?</div>
 
-  <a href="#help" title="Help">
-    <i id="help-btn" class="fa fa-question-circle"></i>
-  </a>
-  <div id="help">
+  <i id="help-btn" class="fa fa-question-circle"></i>
+  <div id="help-modal">
     <div id="help-content">
       <h2>
         <i class="fa fa-bookmark"></i>HOW TO PLAY
       </h2>
-      <p>The game starts with mines hidden on the board. Your goal is to uncover the safe squares.</p>
+      <p>Each game starts with mines hidden on the board. Your goal is to uncover the safe squares.</p>
       <p>When you click on a safe square, you'll see the number of bombs that square touches.</p>
       <p>To help keep track, you can mark squares as bombs by right-clicking on them.</p>
-      <a href="" title="Close" id="close">
+      <span title="Close" id="help-close">
         <i class="fa fa-times-circle"></i>Close this window
-      </a>
+      </span>
       <p id="credit">
         Built by @stothelios as an experiment in JS objects.
       </p>
     </div>
   </div>
+
+  <a id="git-btn" title="GitHub" href="https://github.com/sconstantinides/MinesweeperJS" target="_blank">
+    <i class="fa fa-github"></i>
+  </a>
 
   <script type="text/javascript">
     $(function(){
@@ -49,17 +54,28 @@
         newGame(difficulty);
 
       // Set new game listeners
-        $("#new-game").click(function(event) {
-            var difficulty = $('#difficulty li.selected').attr('id');
-            newGame(difficulty);
+        $('#new-game').click(function() {
+          var difficulty = $('#difficulty li.selected').attr('id');
+          newGame(difficulty);
         });
 
-        $("#difficulty li").click(function(event) {
-            $('#difficulty li').removeClass('selected');
-            $(this).addClass('selected');
+        $("#difficulty li").click(function() {
+          $('#difficulty li').removeClass('selected');
+          $(this).addClass('selected');
 
-            var difficulty = this.id;
-            newGame(difficulty);
+          var difficulty = this.id;
+          newGame(difficulty);
+        });
+
+      // Set help listeners
+        $('#help-btn').click(function() {
+          $('#help-modal').fadeIn(400);
+        });
+
+        $('#help-modal').click(function(event) {
+          if(event.target.id === 'help-modal' || event.target.id === 'help-close') {
+            $('#help-modal').fadeOut(200);
+          }
         });
 
     });

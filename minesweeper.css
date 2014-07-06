@@ -133,20 +133,24 @@ body {
     background-color: #333;
   }
 
-/* Help button and modal */
+/* Help modal and buttons */
 
-  #help-btn {
+  #help-btn, #git-btn {
     position: absolute;
     top: 6px;
-    left: 6px;
 
     font-size: 32px;
     color: #bbb;
+    cursor: pointer;
+    line-height: 1em; /* fixes link spacing */
   }
 
-  #help-btn:hover { color: #333; }
+  #help-btn:hover, #git-btn:hover { color: #333; }
 
-  #help {
+  #help-btn { left: 6px; }
+  #git-btn { right: 6px; }
+
+  #help-modal {
     position: fixed;
     top: 0;
     right: 0;
@@ -155,18 +159,12 @@ body {
 
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 999;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #help:target {
-    opacity: 1;
-    pointer-events: auto;
+    display: none;
   }
 
   #help-content {
     width: 340px;
-    margin: 120px auto 0 auto;
+    margin: 132px auto 0 auto;
     padding: 10px 25px;
     border-radius: 10px;
 
@@ -175,11 +173,12 @@ body {
 
   #help-content .fa { padding-right: 0.3em; }
 
-  #help-content a, #help-content a:visited { color: #333; }
+  #help-close {
+    font-weight: bold;
+    cursor: pointer;
+  }
 
-  #help-content a:hover { color: #777; }
-
-  #close { font-weight: bold; }
+  #help-close:hover { color: #777; }
 
   #credit {
     padding-top: 5px;
