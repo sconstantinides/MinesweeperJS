@@ -1,0 +1,7 @@
+== Minesweeper
+
+A simple game built using JavaScript. My first experiment using JS objects.
+
+== Feedback
+
+Please send any questions or suggestions to sconstantinides@gmail.com
